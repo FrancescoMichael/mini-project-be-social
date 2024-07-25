@@ -10,6 +10,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
+import { StyleRegistry } from "styled-jsx";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -121,3 +122,13 @@ export const verificationTokens = createTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+export const addresses = createTable(
+  "address",
+  {
+    id: varchar("id", { length: 255 }).notNull().primaryKey(),
+    street: varchar("street", { length: 255 }).notNull(),
+    city: varchar("city", { length: 255 }),
+    country: varchar("country", { length: 100}).notNull()
+  }
+)
